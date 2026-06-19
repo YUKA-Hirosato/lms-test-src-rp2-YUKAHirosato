@@ -72,9 +72,10 @@ public class Case04 {
 		//Select dropdown = new Select(webDriver.findElement(By.cssSelector("ul.dropdown-menu")).clock());
 		//dropdown.selectByVisibleText("ヘルプ");
 		//webDriver.findElement(By)
-		webDriver.findElement(By.cssSelector(".dropdown-menu")).findElement(By.linkText("ヘルプ")).click();
+		webDriver.findElement(By.cssSelector(".dropdown-toggle")).click();
+		webDriver.findElement(By.linkText("ヘルプ")).click();
 
-		assertEquals("ヘルプ", WebDriverUtils.webDriver.getTitle());
+		assertEquals("ヘルプ | LMS", WebDriverUtils.webDriver.getTitle());
 
 	}
 
