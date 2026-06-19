@@ -94,6 +94,14 @@ public class Case04 {
 
 		Set<String> windowHandles = webDriver.getWindowHandles();
 
+		//レビューで返却された修正箇所
+		//	for(String handle:windowHandles){
+		//    if(! handle ＝＝ windowHandle){
+		//     webDriver.switchTo().window(handle);
+		//    break;
+		//}
+		//}
+
 		for (String handle : windowHandles) {
 			webDriver.switchTo().window(handle);
 		}
