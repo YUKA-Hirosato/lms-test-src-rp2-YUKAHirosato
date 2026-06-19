@@ -10,6 +10,7 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.openqa.selenium.By;
 import org.springframework.boot.test.web.server.LocalServerPort;
 
 import jp.co.sss.lms.ct.util.WebDriverUtils;
@@ -55,6 +56,19 @@ public class Case03 {
 	@DisplayName("テスト02 初回ログイン済みの受講生ユーザーでログイン")
 	void test02() {
 		// TODO ここに追加
+		WebDriverUtils utils = new WebDriverUtils();
+
+		webDriver.findElement(By.id("loginId")).sendKeys("StudentAA01");
+		webDriver.findElement(By.id("password")).sendKeys("StlmsAA01");
+		webDriver.findElement(By.cssSelector(".btn.btn-primary")).click();
+
+		utils.visibilityTimeout(By.cssSelector(".navbar-brand"), 10);
+
+		assertEquals("コース詳細 | LMS", WebDriverUtils.webDriver.getTitle());
+
+		// 開いたページのキャプチャを取得する
+		WebDriverUtils.getEvidence(new Object() {
+		});
 
 	}
 
