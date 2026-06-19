@@ -3,6 +3,8 @@ package jp.co.sss.lms.ct.f02_faq;
 import static jp.co.sss.lms.ct.util.WebDriverUtils.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Set;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -84,6 +86,27 @@ public class Case04 {
 	@DisplayName("テスト04 「よくある質問」リンクからよくある質問画面を別タブに開く")
 	void test04() {
 		// TODO ここに追加
+		WebDriverUtils utils = new WebDriverUtils();
+
+		webDriver.findElement(By.linkText("よくある質問")).click();
+
+		utils.visibilityTimeout(By.linkText("よくある質問"), 10);
+
+		Set<String> windowHandles = webDriver.getWindowHandles();
+
+		for (String handle : windowHandles) {
+			webDriver.switchTo().window(handle);
+		}
+
+		//WebDriverWait wait = new WebDriverWait(WebDriverUtils.webDriver, Duration.ofSeconds(10));
+		//wait.until(ExpectedConditions.titleIs("よくある質問 | LMS"));
+
+		assertEquals("よくある質問 | LMS", WebDriverUtils.webDriver.getTitle());
+
+		// 開いたページのキャプチャを取得する
+		WebDriverUtils.getEvidence(new Object() {
+		});
+
 	}
 
 }
