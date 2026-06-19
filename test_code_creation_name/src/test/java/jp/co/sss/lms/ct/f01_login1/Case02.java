@@ -49,8 +49,8 @@ public class Case02 {
 
 		// 指定のURLの画面を開く
 		//再利用性
-		//WebDriverUtils.goTo("http://localhost:" + port + "/lms");
-		webDriver.goTo("http://localhost:8080/lms/");
+		WebDriverUtils.goTo("http://localhost:" + port + "/lms");
+		//webDriver.goTo("http://localhost:8080/lms/");
 
 		//Titleの取得とアサーション
 		assertEquals("ログイン | LMS", WebDriverUtils.webDriver.getTitle());
@@ -66,13 +66,17 @@ public class Case02 {
 	@DisplayName("テスト02 DBに登録されていないユーザーでログイン")
 	void test02() {
 		// TODO ここに追加
+		WebDriverUtils utils = new WebDriverUtils();
+
 		//DBに登録されていないユーザーを入力
 		webDriver.findElement(By.id("loginId")).sendKeys("Student999");
 		webDriver.findElement(By.id("password")).sendKeys("Student999");
-		//送信ボタン押して
+		webDriver.findElement(By.cssSelector(".btn.btn-primary")).click();
+
+		utils.visibilityTimeout(By.cssSelector(".help-inline.error"), 10);
 
 		WebElement classElement = webDriver.findElement(By.cssSelector(".help-inline.error"));
-		assertEquals("*&nbsp;ログインに失敗しました。", classElement.getText());
+		assertEquals("* ログインに失敗しました。", classElement.getText());
 
 		// 開いたページのキャプチャを取得する
 		WebDriverUtils.getEvidence(new Object() {
