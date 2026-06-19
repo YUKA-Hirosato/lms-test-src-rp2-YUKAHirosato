@@ -46,18 +46,13 @@ public class Case02 {
 	void test01() {
 		// TODO ここに追加
 		WebDriverUtils webDriver = new WebDriverUtils();
-
 		// 指定のURLの画面を開く
 		//再利用性
-		WebDriverUtils.goTo("http://localhost:" + port + "/lms");
-		//webDriver.goTo("http://localhost:8080/lms/");
+		//WebDriverUtils.goTo("http://localhost:" + port + "/lms");
+		webDriver.goTo("http://localhost:8080/lms/");
 
 		//Titleの取得とアサーション
 		assertEquals("ログイン | LMS", WebDriverUtils.webDriver.getTitle());
-
-		// 開いたページのキャプチャを取得する
-		WebDriverUtils.getEvidence(new Object() {
-		});
 
 	}
 
