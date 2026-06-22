@@ -70,10 +70,7 @@ public class Case04 {
 	@DisplayName("テスト03 上部メニューの「ヘルプ」リンクからヘルプ画面に遷移")
 	void test03() {
 		// TODO ここに追加
-		//webDriver.findElement(By.cssSelector(".dropdown-menu")).click();
-		//Select dropdown = new Select(webDriver.findElement(By.cssSelector("ul.dropdown-menu")).clock());
-		//dropdown.selectByVisibleText("ヘルプ");
-		//webDriver.findElement(By)
+
 		webDriver.findElement(By.cssSelector(".dropdown-toggle")).click();
 		webDriver.findElement(By.linkText("ヘルプ")).click();
 
@@ -105,9 +102,6 @@ public class Case04 {
 		for (String handle : windowHandles) {
 			webDriver.switchTo().window(handle);
 		}
-
-		//WebDriverWait wait = new WebDriverWait(WebDriverUtils.webDriver, Duration.ofSeconds(10));
-		//wait.until(ExpectedConditions.titleIs("よくある質問 | LMS"));
 
 		assertEquals("よくある質問 | LMS", WebDriverUtils.webDriver.getTitle());
 

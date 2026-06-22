@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import jp.co.sss.lms.ct.util.WebDriverUtils;
 
@@ -102,6 +103,16 @@ public class Case05 {
 	@DisplayName("テスト05 キーワード検索で該当キーワードを含む検索結果だけ表示")
 	void test05() {
 		// TODO ここに追加
+		webDriver.findElement(By.id("form")).sendKeys("途中退校");
+		webDriver.findElement(By.cssSelector(".btn.btn-primary")).click();
+		//検索後の表示画面のタイトル？URL?まあそんなのが一致するかのテストコード
+		//webDriver.findElement(By.className("text-primary mr10"));
+		//	assertEquals("途中退校"(部分一致)),
+		//partiaLinkElement.getText()."キャンセル料・途中退校について");
+
+		WebElement partiaLinkElement = webDriver.findElement(By.cssSelector(".mb10"));
+		String actualText = partiaLinkElement.getText();
+		assertTrue(actualText.contains("途中退校"), partiaLinkElement.getText());
 	}
 
 	@Test
@@ -109,6 +120,11 @@ public class Case05 {
 	@DisplayName("テスト06 「クリア」ボタン押下で入力したキーワードを消去")
 	void test06() {
 		// TODO ここに追加
+		webDriver.findElement(By.cssSelector("input[value='クリア']")).click();
+
+		WebDriverUtils.getEvidence(new Object() {
+		});
+
 	}
 
 }
