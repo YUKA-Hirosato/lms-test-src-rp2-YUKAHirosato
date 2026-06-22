@@ -118,6 +118,11 @@ public class Case05 {
 		// TODO ここに追加
 		webDriver.findElement(By.cssSelector("input[value='クリア']")).click();
 
+		WebElement inputElement = webDriver.findElement(By.id("form"));
+		String inputValue = inputElement.getAttribute("value");
+		//assertNull(inputValue);
+		assertEquals("", inputValue);
+
 		WebDriverUtils.getEvidence(new Object() {
 		});
 
