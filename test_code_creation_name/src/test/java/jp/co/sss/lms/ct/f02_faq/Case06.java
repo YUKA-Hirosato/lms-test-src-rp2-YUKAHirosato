@@ -126,11 +126,23 @@ public class Case06 {
 
 		WebElement hiddenElement = webDriver.findElement(By.cssSelector(".dn"));
 		((JavascriptExecutor) webDriver).executeScript("arguments[0].click();", hiddenElement);
-		//内容が表示されるかのテスト
 
-		assertTrue(webDriver.findElement(By.cssSelector(".text-warning.mr10")).isDisplayed());
+		//内容が表示されるかのテスト
+		// 要素のテキストを取得
+		//キャンセル料・途中退校について
+
+		String actualText1 = webDriver.findElement(By.cssSelector("tbody tr:nth-child(1) dl dt span:nth-child(2)"))
+				.getText();
+		assertEquals("キャンセル料・途中退校について", actualText1);
+
+		//研修の申し込みはどのようにすれば良いですか？
+
+		String actualText2 = webDriver.findElement(By.cssSelector("tbody tr:nth-child(2) dl dt span:nth-child(2)"))
+				.getText();
+		assertEquals("研修の申し込みはどのようにすれば良いですか？", actualText2);
 
 		//キャプチャに保存
+
 		WebDriverUtils.getEvidence(new Object() {
 		});
 

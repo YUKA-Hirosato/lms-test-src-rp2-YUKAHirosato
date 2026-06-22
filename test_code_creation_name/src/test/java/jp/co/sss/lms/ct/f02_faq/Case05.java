@@ -103,12 +103,17 @@ public class Case05 {
 	@DisplayName("テスト05 キーワード検索で該当キーワードを含む検索結果だけ表示")
 	void test05() {
 		// TODO ここに追加
+		//検索するキーワードを入力
+
 		webDriver.findElement(By.id("form")).sendKeys("途中退校");
 		webDriver.findElement(By.cssSelector(".btn.btn-primary")).click();
 
-		WebElement partiaLinkElement = webDriver.findElement(By.cssSelector(".mb10"));
+		//検索結果にキーワードが含まれているかテスト
+
+		WebElement partiaLinkElement = webDriver.findElement(By.cssSelector("tbody tr:nth-child(1) dl"));
 		String actualText = partiaLinkElement.getText();
-		assertTrue(actualText.contains("途中退校"), partiaLinkElement.getText());
+		assertTrue(actualText.contains("途中退校"));
+
 	}
 
 	@Test
