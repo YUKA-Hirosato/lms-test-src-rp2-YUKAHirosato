@@ -105,14 +105,11 @@ public class Case06 {
 	void test05() {
 
 		// TODO ここに追加
-		//キーワード入力
-		webDriver.findElement(By.id("form")).sendKeys("途中退校");
-		//検索ボタン押下
-		webDriver.findElement(By.cssSelector(".btn.btn-primary")).click();
-		//検索結果テスト
-		WebElement partiaLinkElement = webDriver.findElement(By.cssSelector(".mb10"));
-		String actualText = partiaLinkElement.getText();
-		assertTrue(actualText.contains("途中退校"), partiaLinkElement.getText());
+
+		//カテゴリ検索をクリック
+		webDriver.findElement(By.linkText("【研修関係】")).click();
+		//表示された結果をテスト
+		assertTrue(webDriver.findElement(By.cssSelector(".table.table-hover.sortabletable")).isDisplayed());
 
 	}
 
@@ -129,7 +126,7 @@ public class Case06 {
 
 		WebElement hiddenElement = webDriver.findElement(By.cssSelector(".dn"));
 		((JavascriptExecutor) webDriver).executeScript("arguments[0].click();", hiddenElement);
-		//表示された内容が一致するかのテスト
+		//内容が表示されるかのテスト
 
 		assertTrue(webDriver.findElement(By.cssSelector(".text-warning.mr10")).isDisplayed());
 
