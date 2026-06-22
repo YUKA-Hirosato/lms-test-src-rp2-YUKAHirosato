@@ -120,7 +120,7 @@ public class Case05 {
 
 		WebElement inputElement = webDriver.findElement(By.id("form"));
 		String inputValue = inputElement.getAttribute("value");
-		//assertNull(inputValue);
+
 		assertEquals("", inputValue);
 
 		WebDriverUtils.getEvidence(new Object() {
