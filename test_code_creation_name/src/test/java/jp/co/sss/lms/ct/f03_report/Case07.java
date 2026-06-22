@@ -1,6 +1,7 @@
 package jp.co.sss.lms.ct.f03_report;
 
 import static jp.co.sss.lms.ct.util.WebDriverUtils.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -9,6 +10,9 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.openqa.selenium.By;
+
+import jp.co.sss.lms.ct.util.WebDriverUtils;
 
 /**
  * 結合テスト レポート機能
@@ -36,6 +40,10 @@ public class Case07 {
 	@DisplayName("テスト01 トップページURLでアクセス")
 	void test01() {
 		// TODO ここに追加
+		WebDriverUtils.goTo("http://localhost:8080/lms/");
+
+		assertEquals("ログイン | LMS", WebDriverUtils.webDriver.getTitle());
+
 	}
 
 	@Test
@@ -43,6 +51,16 @@ public class Case07 {
 	@DisplayName("テスト02 初回ログイン済みの受講生ユーザーでログイン")
 	void test02() {
 		// TODO ここに追加
+		WebDriverUtils utils = new WebDriverUtils();
+		//ログイン情報を入力し、送信
+		webDriver.findElement(By.id("loginId")).sendKeys("StudentAA01");
+		webDriver.findElement(By.id("password")).sendKeys("StlmsAA01");
+		webDriver.findElement(By.cssSelector(".btn.btn-primary")).click();
+
+		utils.visibilityTimeout(By.cssSelector(".navbar-brand"), 10);
+
+		assertEquals("コース詳細 | LMS", WebDriverUtils.webDriver.getTitle());
+
 	}
 
 	@Test
