@@ -105,10 +105,6 @@ public class Case05 {
 		// TODO ここに追加
 		webDriver.findElement(By.id("form")).sendKeys("途中退校");
 		webDriver.findElement(By.cssSelector(".btn.btn-primary")).click();
-		//検索後の表示画面のタイトル？URL?まあそんなのが一致するかのテストコード
-		//webDriver.findElement(By.className("text-primary mr10"));
-		//	assertEquals("途中退校"(部分一致)),
-		//partiaLinkElement.getText()."キャンセル料・途中退校について");
 
 		WebElement partiaLinkElement = webDriver.findElement(By.cssSelector(".mb10"));
 		String actualText = partiaLinkElement.getText();
