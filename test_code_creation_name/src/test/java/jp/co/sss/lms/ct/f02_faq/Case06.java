@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
 import jp.co.sss.lms.ct.util.WebDriverUtils;
@@ -102,10 +103,13 @@ public class Case06 {
 	@Order(5)
 	@DisplayName("テスト05 カテゴリ検索で該当カテゴリの検索結果だけ表示")
 	void test05() {
-		// TODO ここに追加
-		webDriver.findElement(By.id("form")).sendKeys("途中退校");
-		webDriver.findElement(By.cssSelector(".btn.btn-primary")).click();
 
+		// TODO ここに追加
+		//キーワード入力
+		webDriver.findElement(By.id("form")).sendKeys("途中退校");
+		//検索ボタン押下
+		webDriver.findElement(By.cssSelector(".btn.btn-primary")).click();
+		//検索結果テスト
 		WebElement partiaLinkElement = webDriver.findElement(By.cssSelector(".mb10"));
 		String actualText = partiaLinkElement.getText();
 		assertTrue(actualText.contains("途中退校"), partiaLinkElement.getText());
@@ -117,6 +121,22 @@ public class Case06 {
 	@DisplayName("テスト06 検索結果の質問をクリックしその回答を表示")
 	void test06() {
 		// TODO ここに追加
+		WebDriverUtils utils = new WebDriverUtils();
+
+		//画面スクロール
+		utils.scrollBy("100");
+		//検索結果を押下
+
+		WebElement hiddenElement = webDriver.findElement(By.cssSelector(".dn"));
+		((JavascriptExecutor) webDriver).executeScript("arguments[0].click();", hiddenElement);
+		//表示された内容が一致するかのテスト
+
+		assertTrue(webDriver.findElement(By.cssSelector(".text-warning.mr10")).isDisplayed());
+
+		//キャプチャに保存
+		WebDriverUtils.getEvidence(new Object() {
+		});
+
 	}
 
 }
