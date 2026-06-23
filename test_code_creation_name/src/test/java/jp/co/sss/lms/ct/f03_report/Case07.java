@@ -81,6 +81,10 @@ public class Case07 {
 	@DisplayName("テスト04 「提出する」ボタンを押下しレポート登録画面に遷移")
 	void test04() {
 		// TODO ここに追加
+		//レポート提出ボタンを押下
+		webDriver.findElement(By.cssSelector("td form .btn.btn-default")).click();
+		//レポート登録画面の確認
+		assertEquals("レポート登録 | LMS", webDriver.getTitle());
 	}
 
 	@Test
