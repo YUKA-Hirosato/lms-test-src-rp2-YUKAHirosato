@@ -68,6 +68,12 @@ public class Case07 {
 	@DisplayName("テスト03 未提出の研修日の「詳細」ボタンを押下しセクション詳細画面に遷移")
 	void test03() {
 		// TODO ここに追加
+		//詳細ボタンを押下
+		webDriver.findElement(By.cssSelector("td form input:nth-child(3)")).click();
+
+		//セクション画面の確認
+		assertEquals("セクション詳細 | LMS", webDriver.getTitle());
+
 	}
 
 	@Test
