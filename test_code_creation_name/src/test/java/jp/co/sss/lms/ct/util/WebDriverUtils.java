@@ -88,17 +88,6 @@ public class WebDriverUtils {
 	 * @param instance
 	 * @return 
 	 */
-	//	public static File getEvidence(Object instance) {
-	//		File tempFile = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.FILE);
-	//		try {
-	//			String className = instance.getClass().getEnclosingClass().getSimpleName();
-	//			String methodName = instance.getClass().getEnclosingMethod().getName();
-	//			Files.move(tempFile, new File("evidence\\" + className + "_" + methodName + ".png"));
-	//		} catch (IOException e) {
-	//			e.printStackTrace();
-	//		}
-	//	}
-
 	public static void getEvidence(Object instance) {
 		File tempFile = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.FILE);
 		try {

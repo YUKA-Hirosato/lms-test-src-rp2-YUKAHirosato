@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import jp.co.sss.lms.ct.util.WebDriverUtils;
 
@@ -70,6 +71,9 @@ public class Case07 {
 		// TODO ここに追加
 		//詳細ボタンを押下
 		webDriver.findElement(By.cssSelector("td form input:nth-child(3)")).click();
+		//ちょっと待つ
+		WebDriverUtils utils = new WebDriverUtils();
+		utils.visibilityTimeout(By.cssSelector(".nav.navbar-nav.navbar-right"), 3);
 
 		//セクション画面の確認
 		assertEquals("セクション詳細 | LMS", webDriver.getTitle());
@@ -83,6 +87,10 @@ public class Case07 {
 		// TODO ここに追加
 		//レポート提出ボタンを押下
 		webDriver.findElement(By.cssSelector("td form .btn.btn-default")).click();
+		//ちょっと待つ
+		WebDriverUtils utils = new WebDriverUtils();
+		utils.visibilityTimeout(By.cssSelector(".well.bs-component"), 3);
+
 		//レポート登録画面の確認
 		assertEquals("レポート登録 | LMS", webDriver.getTitle());
 	}
@@ -92,6 +100,20 @@ public class Case07 {
 	@DisplayName("テスト05 報告内容を入力して「提出する」ボタンを押下し確認ボタン名が更新される")
 	void test05() {
 		// TODO ここに追加
+		//報告内容を入力
+		webDriver.findElement(By.cssSelector("textarea")).sendKeys("ケース07実行");
+
+		//「提出する」ボタンを押下
+		webDriver.findElement(By.cssSelector(".btn.btn-primary")).click();
+
+		//確認ボタン名が変更されているか確認
+		WebElement btnName = webDriver.findElement(By.cssSelector("form input[type='submit']"));
+		assertEquals("提出済み日報【デモ】を確認する", btnName.getAttribute("value"));
+
+		//スクショ
+		WebDriverUtils.getEvidence(new Object() {
+		});
+
 	}
 
 }
