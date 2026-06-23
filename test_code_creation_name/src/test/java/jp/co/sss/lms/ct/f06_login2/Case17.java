@@ -1,6 +1,7 @@
 package jp.co.sss.lms.ct.f06_login2;
 
 import static jp.co.sss.lms.ct.util.WebDriverUtils.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -9,6 +10,9 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.openqa.selenium.By;
+
+import jp.co.sss.lms.ct.util.WebDriverUtils;
 
 /**
  * 結合テスト ログイン機能②
@@ -36,6 +40,10 @@ public class Case17 {
 	@DisplayName("テスト01 トップページURLでアクセス")
 	void test01() {
 		// TODO ここに追加
+		WebDriverUtils.goTo("http://localhost:8080/lms/");
+
+		assertEquals("ログイン | LMS", WebDriverUtils.webDriver.getTitle());
+
 	}
 
 	@Test
@@ -43,6 +51,18 @@ public class Case17 {
 	@DisplayName("テスト02 DBに初期登録された未ログインの受講生ユーザーでログイン")
 	void test02() {
 		// TODO ここに追加
+		//テスト時はStudentAA05を使用する
+		webDriver.findElement(By.id("loginId")).sendKeys("StudentAA03");
+		webDriver.findElement(By.id("password")).sendKeys("StudentAA03");
+		webDriver.findElement(By.cssSelector(".btn.btn-primary")).click();
+
+		//ちょっと待つ
+		//	WebDriverUtils utils = new WebDriverUtils();
+		//utils.visibilityTimeout(By.cssSelector(".nav.navbar-nav.navbar-right"), 1);
+
+		//画面確認
+		assertEquals("セキュリティ規約 | LMS", WebDriverUtils.webDriver.getTitle());
+
 	}
 
 	@Test
@@ -50,6 +70,14 @@ public class Case17 {
 	@DisplayName("テスト03 「同意します」チェックボックスにチェックを入れ「次へ」ボタン押下")
 	void test03() {
 		// TODO ここに追加
+		//「同意します」を押下
+		webDriver.findElement(By.cssSelector(".checkbox label")).click();
+		//次へボタン押下
+		webDriver.findElement(By.cssSelector("div .btn.btn-primary")).click();
+
+		//画面確認
+		assertEquals("パスワード変更 | LMS", WebDriverUtils.webDriver.getTitle());
+
 	}
 
 	@Test
@@ -57,6 +85,32 @@ public class Case17 {
 	@DisplayName("テスト04 変更パスワードを入力し「変更」ボタン押下")
 	void test04() {
 		// TODO ここに追加
+
+		//現在のパスワードを入力
+		webDriver.findElement(By.cssSelector("form div:nth-of-type(1) input")).sendKeys("StudentAA03");
+		//新しいパスワードを入力
+		webDriver.findElement(By.cssSelector("form div:nth-of-type(2) input")).sendKeys("StlmsAA03");
+
+		//確認パスワードを入力
+		webDriver.findElement(By.cssSelector("form div:nth-of-type(3) input")).sendKeys("StlmsAA03");
+
+		//変更ボタンを押下
+		webDriver.findElement(By.cssSelector("button[type='submit']")).click();
+
+		//パスワード変更の確認の変更ボタンを押下
+
+		WebDriverUtils utils = new WebDriverUtils();
+		utils.visibilityTimeout(By.id("upd-btn"), 3);
+
+		webDriver.findElement(By.id("upd-btn")).click();
+
+		//画面確認
+		assertEquals("コース詳細 | LMS", WebDriverUtils.webDriver.getTitle());
+
+		//スクショ
+		WebDriverUtils.getEvidence(new Object() {
+		});
+
 	}
 
 }
