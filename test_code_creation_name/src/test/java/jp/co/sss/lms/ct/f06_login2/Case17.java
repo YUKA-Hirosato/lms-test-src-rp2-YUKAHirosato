@@ -51,7 +51,7 @@ public class Case17 {
 	@DisplayName("テスト02 DBに初期登録された未ログインの受講生ユーザーでログイン")
 	void test02() {
 		// TODO ここに追加
-		//テスト時はStudentAA05を使用する
+
 		webDriver.findElement(By.id("loginId")).sendKeys("StudentAA03");
 		webDriver.findElement(By.id("password")).sendKeys("StudentAA03");
 		webDriver.findElement(By.cssSelector(".btn.btn-primary")).click();
