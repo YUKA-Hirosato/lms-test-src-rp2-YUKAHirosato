@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
 import jp.co.sss.lms.ct.util.WebDriverUtils;
@@ -25,6 +26,7 @@ import jp.co.sss.lms.ct.util.WebDriverUtils;
 @TestMethodOrder(OrderAnnotation.class)
 @DisplayName("ケース08 受講生 レポート修正(週報) 正常系")
 public class Case08 {
+	private static String reportDate;
 
 	/** 前処理 */
 	@BeforeAll
@@ -71,49 +73,45 @@ public class Case08 {
 	@DisplayName("テスト03 提出済の研修日の「詳細」ボタンを押下しセクション詳細画面に遷移")
 	void test03() {
 		// TODO ここに追加
-		//提出済みの研修日の詳細ボタンを押下する
-		//上から見て行って、ifステータス=提出済みのとき詳細を押下する
-		//提出済みを調べるためのwebelementlistを準備
-		//ボタンのリストを準備
+		List<WebElement> rows = webDriver.findElements(By.tagName("tr"));
 
-		List<WebElement> status = webDriver
-				.findElements(By.cssSelector(".sctionList tr:nth-of-type(1) td:nth-of-type(3) span"));
-		List<WebElement> btns = webDriver.findElements(By.cssSelector("td form input:nth-child(3)"));
+		for (WebElement row : rows) {
 
-		List<WebElement> rows = webDriver.findElements(By.cssSelector(".sctionList tr"));
-		for (int i = 0; i < rows.size(); i++) {//普通のfor文 i
+			if (row.getText().contains("提出済み")) {
+				reportDate = row.findElement(By.tagName("td")).getText();
 
-			String text = status.get(i).getText();
+				WebElement detailButton = row.findElement(By.cssSelector(".btn.btn-default"));
 
-			if ("提出済み".equals(text)) {
-				btns.get(i).click();
+				((JavascriptExecutor) webDriver).executeScript(
+						"arguments[0].scrollIntoView({block:'center'});",
+						detailButton);
 
-				//ちょっと待つ
-				WebDriverUtils utils = new WebDriverUtils();
-				utils.visibilityTimeout(By.cssSelector(".nav.navbar-nav.navbar-right"), 3);
+				((JavascriptExecutor) webDriver).executeScript(
+						"arguments[0].click();",
+						detailButton);
 
-				//画面確認
-				assertEquals("セクション詳細 | LMS", webDriver.getTitle());
+				visibilityTimeout(By.tagName("h2"), 10);
 
-				//セクション詳細画面に「週報を確認する」ボタンがあれば押下する
-				//form th:nth-child(2) input[type='submit']
-				WebElement btn = webDriver.findElement(By.cssSelector("form input[value*='提出済み']"));
-				String btnText = btn.getText();
+				List<WebElement> weeklyReports = webDriver.findElements(By.cssSelector("input[value*='提出済み週報']"));
 
-				if ("提出済み週報【デモ】を確認する".equals(btnText)) {
-					//		webDriver.findElement(By.cssSelector("form input[type='submit']")).click();
+				if (!weeklyReports.isEmpty()) {
 
-					//画面確認
-					//	assertEquals("レポート登録 | LMS", webDriver.getTitle());
-				} else {
+					reportDate = webDriver.findElement(By.cssSelector("#sectionDetail h2 small")).getText().trim();
 
-					//無ければ戻るボタンを押下する
-					utils.scrollBy("50");
-					webDriver.findElement(By.cssSelector("input[value='戻る']")).click();
+					assertEquals("セクション詳細 | LMS", webDriver.getTitle());
+
+					getEvidence(new Object() {
+					});
+
+					break;
 				}
+				webDriver.navigate().back();
+				visibilityTimeout(By.tagName("h2"), 10);
+
+				rows = webDriver.findElements(By.tagName("tr"));
+
 			}
 		}
-		//週報の確認ボタンがなければ戻るを押下する
 	}
 
 	@Test
@@ -134,6 +132,7 @@ public class Case08 {
 	@DisplayName("テスト05 報告内容を修正して「提出する」ボタンを押下しセクション詳細画面に遷移")
 	void test05() {
 		// TODO ここに追加
+
 	}
 
 	@Test
