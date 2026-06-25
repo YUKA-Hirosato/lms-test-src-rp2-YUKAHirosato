@@ -84,10 +84,14 @@ public class Case10 {
 		webDriver.findElement(By.cssSelector("form input[value='出勤'")).click();
 		//「OK」を押下
 		webDriver.switchTo().alert().accept();
-		//表示確認
-		WebElement attendant = webDriver
-				.findElement(By.xpath("//th[contains(text(),'開始時間')]/following-sibling::td[@class='w80']"));
-		assertTrue(attendant.isDisplayed());
+
+		String targetDate = "2026年6月25日(木)";
+		String xpathExpression = String.format(
+				"//tr[td[contains(text(), '%s')]]/td[@class='w80'][1]",
+				targetDate);
+		WebElement startTimeElement = webDriver.findElement(By.xpath(xpathExpression));
+		boolean isDisplayed = startTimeElement.isDisplayed();
+		assertTrue(isDisplayed);
 
 	}
 
@@ -96,6 +100,23 @@ public class Case10 {
 	@DisplayName("テスト05 「退勤」ボタンを押下し退勤時間を登録")
 	void test05() {
 		// TODO ここに追加
+		//「退勤」ボタンを押下
+		webDriver.findElement(By.cssSelector("form input[value='退勤'")).click();
+		//「OK」を押下
+		webDriver.switchTo().alert().accept();
+
+		String targetDate = "2026年6月25日(木)";
+		String xpathExpression = String.format(
+				"//tr[td[contains(text(), '%s')]]/td[@class='w80'][2]",
+				targetDate);
+		WebElement startTimeElement = webDriver.findElement(By.xpath(xpathExpression));
+		boolean isDisplayed = startTimeElement.isDisplayed();
+		assertTrue(isDisplayed);
+
+		//スクショ
+		WebDriverUtils.getEvidence(new Object() {
+		});
+
 	}
 
 }
