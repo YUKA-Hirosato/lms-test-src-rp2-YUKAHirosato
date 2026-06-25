@@ -52,8 +52,8 @@ public class Case17 {
 	void test02() {
 		// TODO ここに追加
 
-		webDriver.findElement(By.id("loginId")).sendKeys("StudentAA03");
-		webDriver.findElement(By.id("password")).sendKeys("StudentAA03");
+		webDriver.findElement(By.id("loginId")).sendKeys("StudentAA01");
+		webDriver.findElement(By.id("password")).sendKeys("StudentAA01");
 		webDriver.findElement(By.cssSelector(".btn.btn-primary")).click();
 
 		//ちょっと待つ
@@ -70,6 +70,9 @@ public class Case17 {
 	@DisplayName("テスト03 「同意します」チェックボックスにチェックを入れ「次へ」ボタン押下")
 	void test03() {
 		// TODO ここに追加
+		//「OK」を押下
+		//webDriver.switchTo().alert().accept();
+
 		//「同意します」を押下
 		webDriver.findElement(By.cssSelector(".checkbox label")).click();
 		//次へボタン押下
@@ -87,12 +90,12 @@ public class Case17 {
 		// TODO ここに追加
 
 		//現在のパスワードを入力
-		webDriver.findElement(By.cssSelector("form div:nth-of-type(1) input")).sendKeys("StudentAA03");
+		webDriver.findElement(By.cssSelector("form div:nth-of-type(1) input")).sendKeys("StudentAA01");
 		//新しいパスワードを入力
-		webDriver.findElement(By.cssSelector("form div:nth-of-type(2) input")).sendKeys("StlmsAA03");
+		webDriver.findElement(By.cssSelector("form div:nth-of-type(2) input")).sendKeys("StlmsAA01");
 
 		//確認パスワードを入力
-		webDriver.findElement(By.cssSelector("form div:nth-of-type(3) input")).sendKeys("StlmsAA03");
+		webDriver.findElement(By.cssSelector("form div:nth-of-type(3) input")).sendKeys("StlmsAA01");
 
 		//変更ボタンを押下
 		webDriver.findElement(By.cssSelector("button[type='submit']")).click();
