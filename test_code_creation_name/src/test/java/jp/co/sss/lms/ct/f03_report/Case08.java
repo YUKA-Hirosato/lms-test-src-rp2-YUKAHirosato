@@ -26,7 +26,7 @@ import jp.co.sss.lms.ct.util.WebDriverUtils;
 @TestMethodOrder(OrderAnnotation.class)
 @DisplayName("ケース08 受講生 レポート修正(週報) 正常系")
 public class Case08 {
-	private static String reportDate;
+	public static String reportDate;
 	WebDriverUtils utils = new WebDriverUtils();
 
 	/** 前処理 */
