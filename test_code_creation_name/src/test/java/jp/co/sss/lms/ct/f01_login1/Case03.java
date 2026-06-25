@@ -23,6 +23,7 @@ import jp.co.sss.lms.ct.util.WebDriverUtils;
 @TestMethodOrder(OrderAnnotation.class)
 @DisplayName("ケース03 受講生 ログイン 正常系")
 public class Case03 {
+	WebDriverUtils utils = new WebDriverUtils();
 
 	@LocalServerPort
 	private int port;
@@ -45,9 +46,13 @@ public class Case03 {
 	void test01() {
 		// TODO ここに追加
 		//WebDriverUtils.goTo("http://localhost:" + port + "/lms");
-		WebDriverUtils.goTo("http://localhost:8080/lms/");
+		goTo("http://localhost:8080/lms/");
 
-		assertEquals("ログイン | LMS", WebDriverUtils.webDriver.getTitle());
+		assertEquals("ログイン | LMS", webDriver.getTitle());
+
+		//スクショ
+		getEvidence(new Object() {
+		});
 
 	}
 
@@ -56,7 +61,6 @@ public class Case03 {
 	@DisplayName("テスト02 初回ログイン済みの受講生ユーザーでログイン")
 	void test02() {
 		// TODO ここに追加
-		WebDriverUtils utils = new WebDriverUtils();
 
 		webDriver.findElement(By.id("loginId")).sendKeys("StudentAA01");
 		webDriver.findElement(By.id("password")).sendKeys("StlmsAA01");
@@ -64,10 +68,10 @@ public class Case03 {
 
 		utils.visibilityTimeout(By.cssSelector(".navbar-brand"), 10);
 
-		assertEquals("コース詳細 | LMS", WebDriverUtils.webDriver.getTitle());
+		assertEquals("コース詳細 | LMS", webDriver.getTitle());
 
 		// 開いたページのキャプチャを取得する
-		WebDriverUtils.getEvidence(new Object() {
+		getEvidence(new Object() {
 		});
 
 	}

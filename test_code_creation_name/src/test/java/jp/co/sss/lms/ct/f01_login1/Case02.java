@@ -24,6 +24,7 @@ import jp.co.sss.lms.ct.util.WebDriverUtils;
 @TestMethodOrder(OrderAnnotation.class)
 @DisplayName("ケース02 受講生 ログイン 認証失敗")
 public class Case02 {
+	WebDriverUtils utils = new WebDriverUtils();
 
 	@LocalServerPort
 	private int port;
@@ -45,14 +46,14 @@ public class Case02 {
 	@DisplayName("テスト01 トップページURLでアクセス")
 	void test01() {
 		// TODO ここに追加
-		WebDriverUtils webDriver = new WebDriverUtils();
-		// 指定のURLの画面を開く
-		//再利用性
-		//WebDriverUtils.goTo("http://localhost:" + port + "/lms");
-		webDriver.goTo("http://localhost:8080/lms/");
+		goTo("http://localhost:8080/lms/");
 
 		//Titleの取得とアサーション
-		assertEquals("ログイン | LMS", WebDriverUtils.webDriver.getTitle());
+		assertEquals("ログイン | LMS", webDriver.getTitle());
+
+		//スクショ
+		getEvidence(new Object() {
+		});
 
 	}
 
@@ -61,7 +62,6 @@ public class Case02 {
 	@DisplayName("テスト02 DBに登録されていないユーザーでログイン")
 	void test02() {
 		// TODO ここに追加
-		WebDriverUtils utils = new WebDriverUtils();
 
 		//DBに登録されていないユーザーを入力
 		webDriver.findElement(By.id("loginId")).sendKeys("Student999");
@@ -74,7 +74,7 @@ public class Case02 {
 		assertEquals("* ログインに失敗しました。", classElement.getText());
 
 		// 開いたページのキャプチャを取得する
-		WebDriverUtils.getEvidence(new Object() {
+		getEvidence(new Object() {
 		});
 
 	}

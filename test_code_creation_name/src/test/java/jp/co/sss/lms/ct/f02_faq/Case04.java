@@ -24,6 +24,7 @@ import jp.co.sss.lms.ct.util.WebDriverUtils;
 @TestMethodOrder(OrderAnnotation.class)
 @DisplayName("ケース04 よくある質問画面への遷移")
 public class Case04 {
+	WebDriverUtils utils = new WebDriverUtils();
 
 	/** 前処理 */
 	@BeforeAll
@@ -42,9 +43,13 @@ public class Case04 {
 	@DisplayName("テスト01 トップページURLでアクセス")
 	void test01() {
 		// TODO ここに追加
-		WebDriverUtils.goTo("http://localhost:8080/lms/");
+		goTo("http://localhost:8080/lms/");
 
-		assertEquals("ログイン | LMS", WebDriverUtils.webDriver.getTitle());
+		assertEquals("ログイン | LMS", webDriver.getTitle());
+
+		//スクショ
+		getEvidence(new Object() {
+		});
 
 	}
 
@@ -53,7 +58,6 @@ public class Case04 {
 	@DisplayName("テスト02 初回ログイン済みの受講生ユーザーでログイン")
 	void test02() {
 		// TODO ここに追加
-		WebDriverUtils utils = new WebDriverUtils();
 
 		webDriver.findElement(By.id("loginId")).sendKeys("StudentAA01");
 		webDriver.findElement(By.id("password")).sendKeys("StlmsAA01");
@@ -61,7 +65,11 @@ public class Case04 {
 
 		utils.visibilityTimeout(By.cssSelector(".navbar-brand"), 10);
 
-		assertEquals("コース詳細 | LMS", WebDriverUtils.webDriver.getTitle());
+		assertEquals("コース詳細 | LMS", webDriver.getTitle());
+
+		//スクショ
+		getEvidence(new Object() {
+		});
 
 	}
 
@@ -74,7 +82,11 @@ public class Case04 {
 		webDriver.findElement(By.cssSelector(".dropdown-toggle")).click();
 		webDriver.findElement(By.linkText("ヘルプ")).click();
 
-		assertEquals("ヘルプ | LMS", WebDriverUtils.webDriver.getTitle());
+		assertEquals("ヘルプ | LMS", webDriver.getTitle());
+
+		//スクショ
+		getEvidence(new Object() {
+		});
 
 	}
 
@@ -83,7 +95,6 @@ public class Case04 {
 	@DisplayName("テスト04 「よくある質問」リンクからよくある質問画面を別タブに開く")
 	void test04() {
 		// TODO ここに追加
-		WebDriverUtils utils = new WebDriverUtils();
 
 		webDriver.findElement(By.linkText("よくある質問")).click();
 
@@ -103,10 +114,10 @@ public class Case04 {
 			webDriver.switchTo().window(handle);
 		}
 
-		assertEquals("よくある質問 | LMS", WebDriverUtils.webDriver.getTitle());
+		assertEquals("よくある質問 | LMS", webDriver.getTitle());
 
 		// 開いたページのキャプチャを取得する
-		WebDriverUtils.getEvidence(new Object() {
+		getEvidence(new Object() {
 		});
 
 	}

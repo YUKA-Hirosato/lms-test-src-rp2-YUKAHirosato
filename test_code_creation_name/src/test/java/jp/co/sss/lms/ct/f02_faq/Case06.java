@@ -26,6 +26,7 @@ import jp.co.sss.lms.ct.util.WebDriverUtils;
 @TestMethodOrder(OrderAnnotation.class)
 @DisplayName("ケース06 カテゴリ検索 正常系")
 public class Case06 {
+	WebDriverUtils utils = new WebDriverUtils();
 
 	/** 前処理 */
 	@BeforeAll
@@ -44,9 +45,13 @@ public class Case06 {
 	@DisplayName("テスト01 トップページURLでアクセス")
 	void test01() {
 		// TODO ここに追加
-		WebDriverUtils.goTo("http://localhost:8080/lms/");
+		goTo("http://localhost:8080/lms/");
 
-		assertEquals("ログイン | LMS", WebDriverUtils.webDriver.getTitle());
+		assertEquals("ログイン | LMS", webDriver.getTitle());
+
+		//スクショ
+		getEvidence(new Object() {
+		});
 
 	}
 
@@ -55,7 +60,6 @@ public class Case06 {
 	@DisplayName("テスト02 初回ログイン済みの受講生ユーザーでログイン")
 	void test02() {
 		// TODO ここに追加
-		WebDriverUtils utils = new WebDriverUtils();
 
 		webDriver.findElement(By.id("loginId")).sendKeys("StudentAA01");
 		webDriver.findElement(By.id("password")).sendKeys("StlmsAA01");
@@ -63,7 +67,11 @@ public class Case06 {
 
 		utils.visibilityTimeout(By.cssSelector(".navbar-brand"), 10);
 
-		assertEquals("コース詳細 | LMS", WebDriverUtils.webDriver.getTitle());
+		assertEquals("コース詳細 | LMS", webDriver.getTitle());
+
+		//スクショ
+		getEvidence(new Object() {
+		});
 
 	}
 
@@ -75,7 +83,11 @@ public class Case06 {
 		webDriver.findElement(By.cssSelector(".dropdown-toggle")).click();
 		webDriver.findElement(By.linkText("ヘルプ")).click();
 
-		assertEquals("ヘルプ | LMS", WebDriverUtils.webDriver.getTitle());
+		assertEquals("ヘルプ | LMS", webDriver.getTitle());
+
+		//スクショ
+		getEvidence(new Object() {
+		});
 
 	}
 
@@ -84,7 +96,6 @@ public class Case06 {
 	@DisplayName("テスト04 「よくある質問」リンクからよくある質問画面を別タブに開く")
 	void test04() {
 		// TODO ここに追加
-		WebDriverUtils utils = new WebDriverUtils();
 
 		webDriver.findElement(By.linkText("よくある質問")).click();
 
@@ -95,7 +106,11 @@ public class Case06 {
 		for (String handle : windowHandles) {
 			webDriver.switchTo().window(handle);
 		}
-		assertEquals("よくある質問 | LMS", WebDriverUtils.webDriver.getTitle());
+		assertEquals("よくある質問 | LMS", webDriver.getTitle());
+
+		//スクショ
+		getEvidence(new Object() {
+		});
 
 	}
 
@@ -111,6 +126,10 @@ public class Case06 {
 		//表示された結果をテスト
 		assertTrue(webDriver.findElement(By.cssSelector(".table.table-hover.sortabletable")).isDisplayed());
 
+		//スクショ
+		getEvidence(new Object() {
+		});
+
 	}
 
 	@Test
@@ -118,7 +137,6 @@ public class Case06 {
 	@DisplayName("テスト06 検索結果の質問をクリックしその回答を表示")
 	void test06() {
 		// TODO ここに追加
-		WebDriverUtils utils = new WebDriverUtils();
 
 		//画面スクロール
 		utils.scrollBy("100");
@@ -143,7 +161,7 @@ public class Case06 {
 
 		//キャプチャに保存
 
-		WebDriverUtils.getEvidence(new Object() {
+		getEvidence(new Object() {
 		});
 
 	}

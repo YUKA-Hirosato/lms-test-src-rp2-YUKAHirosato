@@ -23,6 +23,7 @@ import jp.co.sss.lms.ct.util.WebDriverUtils;
 @TestMethodOrder(OrderAnnotation.class)
 @DisplayName("ケース07 受講生 レポート新規登録(日報) 正常系")
 public class Case07 {
+	WebDriverUtils utils = new WebDriverUtils();
 
 	/** 前処理 */
 	@BeforeAll
@@ -41,9 +42,13 @@ public class Case07 {
 	@DisplayName("テスト01 トップページURLでアクセス")
 	void test01() {
 		// TODO ここに追加
-		WebDriverUtils.goTo("http://localhost:8080/lms/");
+		goTo("http://localhost:8080/lms/");
 
-		assertEquals("ログイン | LMS", WebDriverUtils.webDriver.getTitle());
+		assertEquals("ログイン | LMS", webDriver.getTitle());
+
+		//スクショ
+		getEvidence(new Object() {
+		});
 
 	}
 
@@ -52,7 +57,6 @@ public class Case07 {
 	@DisplayName("テスト02 初回ログイン済みの受講生ユーザーでログイン")
 	void test02() {
 		// TODO ここに追加
-		WebDriverUtils utils = new WebDriverUtils();
 		//ログイン情報を入力し、送信
 		webDriver.findElement(By.id("loginId")).sendKeys("StudentAA01");
 		webDriver.findElement(By.id("password")).sendKeys("StlmsAA01");
@@ -60,7 +64,11 @@ public class Case07 {
 
 		utils.visibilityTimeout(By.cssSelector(".navbar-brand"), 10);
 
-		assertEquals("コース詳細 | LMS", WebDriverUtils.webDriver.getTitle());
+		assertEquals("コース詳細 | LMS", webDriver.getTitle());
+
+		//スクショ
+		getEvidence(new Object() {
+		});
 
 	}
 
@@ -71,12 +79,16 @@ public class Case07 {
 		// TODO ここに追加
 		//詳細ボタンを押下
 		webDriver.findElement(By.cssSelector("td form input:nth-child(3)")).click();
+
 		//ちょっと待つ
-		WebDriverUtils utils = new WebDriverUtils();
 		utils.visibilityTimeout(By.cssSelector(".nav.navbar-nav.navbar-right"), 3);
 
 		//セクション画面の確認
 		assertEquals("セクション詳細 | LMS", webDriver.getTitle());
+
+		//スクショ
+		getEvidence(new Object() {
+		});
 
 	}
 
@@ -87,12 +99,17 @@ public class Case07 {
 		// TODO ここに追加
 		//レポート提出ボタンを押下
 		webDriver.findElement(By.cssSelector("td form .btn.btn-default")).click();
+
 		//ちょっと待つ
-		WebDriverUtils utils = new WebDriverUtils();
 		utils.visibilityTimeout(By.cssSelector(".well.bs-component"), 3);
 
 		//レポート登録画面の確認
 		assertEquals("レポート登録 | LMS", webDriver.getTitle());
+
+		//スクショ
+		getEvidence(new Object() {
+		});
+
 	}
 
 	@Test
@@ -111,7 +128,7 @@ public class Case07 {
 		assertEquals("提出済み日報【デモ】を確認する", btnName.getAttribute("value"));
 
 		//スクショ
-		WebDriverUtils.getEvidence(new Object() {
+		getEvidence(new Object() {
 		});
 
 	}

@@ -44,6 +44,10 @@ public class Case17 {
 
 		assertEquals("ログイン | LMS", WebDriverUtils.webDriver.getTitle());
 
+		//スクショ
+		getEvidence(new Object() {
+		});
+
 	}
 
 	@Test
@@ -63,6 +67,10 @@ public class Case17 {
 		//画面確認
 		assertEquals("セキュリティ規約 | LMS", WebDriverUtils.webDriver.getTitle());
 
+		//スクショ
+		getEvidence(new Object() {
+		});
+
 	}
 
 	@Test
@@ -80,6 +88,10 @@ public class Case17 {
 
 		//画面確認
 		assertEquals("パスワード変更 | LMS", WebDriverUtils.webDriver.getTitle());
+
+		//スクショ
+		getEvidence(new Object() {
+		});
 
 	}
 
@@ -111,7 +123,7 @@ public class Case17 {
 		assertEquals("コース詳細 | LMS", WebDriverUtils.webDriver.getTitle());
 
 		//スクショ
-		WebDriverUtils.getEvidence(new Object() {
+		getEvidence(new Object() {
 		});
 
 	}

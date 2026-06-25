@@ -25,6 +25,7 @@ import jp.co.sss.lms.ct.util.WebDriverUtils;
 @TestMethodOrder(OrderAnnotation.class)
 @DisplayName("ケース05 キーワード検索 正常系")
 public class Case05 {
+	WebDriverUtils utils = new WebDriverUtils();
 
 	/** 前処理 */
 	@BeforeAll
@@ -43,9 +44,13 @@ public class Case05 {
 	@DisplayName("テスト01 トップページURLでアクセス")
 	void test01() {
 		// TODO ここに追加
-		WebDriverUtils.goTo("http://localhost:8080/lms/");
+		goTo("http://localhost:8080/lms/");
 
-		assertEquals("ログイン | LMS", WebDriverUtils.webDriver.getTitle());
+		assertEquals("ログイン | LMS", webDriver.getTitle());
+
+		//スクショ
+		getEvidence(new Object() {
+		});
 
 	}
 
@@ -54,7 +59,6 @@ public class Case05 {
 	@DisplayName("テスト02 初回ログイン済みの受講生ユーザーでログイン")
 	void test02() {
 		// TODO ここに追加
-		WebDriverUtils utils = new WebDriverUtils();
 
 		webDriver.findElement(By.id("loginId")).sendKeys("StudentAA01");
 		webDriver.findElement(By.id("password")).sendKeys("StlmsAA01");
@@ -62,7 +66,11 @@ public class Case05 {
 
 		utils.visibilityTimeout(By.cssSelector(".navbar-brand"), 10);
 
-		assertEquals("コース詳細 | LMS", WebDriverUtils.webDriver.getTitle());
+		assertEquals("コース詳細 | LMS", webDriver.getTitle());
+
+		//スクショ
+		getEvidence(new Object() {
+		});
 
 	}
 
@@ -74,7 +82,11 @@ public class Case05 {
 		webDriver.findElement(By.cssSelector(".dropdown-toggle")).click();
 		webDriver.findElement(By.linkText("ヘルプ")).click();
 
-		assertEquals("ヘルプ | LMS", WebDriverUtils.webDriver.getTitle());
+		assertEquals("ヘルプ | LMS", webDriver.getTitle());
+
+		//スクショ
+		getEvidence(new Object() {
+		});
 
 	}
 
@@ -83,7 +95,6 @@ public class Case05 {
 	@DisplayName("テスト04 「よくある質問」リンクからよくある質問画面を別タブに開く")
 	void test04() {
 		// TODO ここに追加
-		WebDriverUtils utils = new WebDriverUtils();
 
 		webDriver.findElement(By.linkText("よくある質問")).click();
 
@@ -94,7 +105,11 @@ public class Case05 {
 		for (String handle : windowHandles) {
 			webDriver.switchTo().window(handle);
 		}
-		assertEquals("よくある質問 | LMS", WebDriverUtils.webDriver.getTitle());
+		assertEquals("よくある質問 | LMS", webDriver.getTitle());
+
+		//スクショ
+		getEvidence(new Object() {
+		});
 
 	}
 
@@ -114,6 +129,10 @@ public class Case05 {
 		String actualText = partiaLinkElement.getText();
 		assertTrue(actualText.contains("途中退校"));
 
+		//スクショ
+		getEvidence(new Object() {
+		});
+
 	}
 
 	@Test
@@ -128,7 +147,7 @@ public class Case05 {
 
 		assertEquals("", inputValue);
 
-		WebDriverUtils.getEvidence(new Object() {
+		getEvidence(new Object() {
 		});
 
 	}

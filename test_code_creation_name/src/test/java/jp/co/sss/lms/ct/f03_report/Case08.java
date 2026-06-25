@@ -27,6 +27,7 @@ import jp.co.sss.lms.ct.util.WebDriverUtils;
 @DisplayName("ケース08 受講生 レポート修正(週報) 正常系")
 public class Case08 {
 	private static String reportDate;
+	WebDriverUtils utils = new WebDriverUtils();
 
 	/** 前処理 */
 	@BeforeAll
@@ -45,9 +46,13 @@ public class Case08 {
 	@DisplayName("テスト01 トップページURLでアクセス")
 	void test01() {
 		// TODO ここに追加
-		WebDriverUtils.goTo("http://localhost:8080/lms/");
+		goTo("http://localhost:8080/lms/");
 
-		assertEquals("ログイン | LMS", WebDriverUtils.webDriver.getTitle());
+		assertEquals("ログイン | LMS", webDriver.getTitle());
+
+		//スクショ
+		getEvidence(new Object() {
+		});
 
 	}
 
@@ -56,7 +61,6 @@ public class Case08 {
 	@DisplayName("テスト02 初回ログイン済みの受講生ユーザーでログイン")
 	void test02() {
 		// TODO ここに追加
-		WebDriverUtils utils = new WebDriverUtils();
 		//ログイン情報を入力し、送信
 		webDriver.findElement(By.id("loginId")).sendKeys("StudentAA01");
 		webDriver.findElement(By.id("password")).sendKeys("StlmsAA01");
@@ -64,7 +68,11 @@ public class Case08 {
 
 		utils.visibilityTimeout(By.cssSelector(".navbar-brand"), 10);
 
-		assertEquals("コース詳細 | LMS", WebDriverUtils.webDriver.getTitle());
+		assertEquals("コース詳細 | LMS", webDriver.getTitle());
+
+		//スクショ
+		getEvidence(new Object() {
+		});
 
 	}
 
@@ -121,7 +129,6 @@ public class Case08 {
 	@Order(4)
 	@DisplayName("テスト04 「確認する」ボタンを押下しレポート登録画面に遷移")
 	void test04() {
-		WebDriverUtils utils = new WebDriverUtils();
 
 		// TODO ここに追加
 		//確認するボタンを押下する
@@ -132,6 +139,10 @@ public class Case08 {
 		visibilityTimeout(By.tagName("h2"), 3);
 		//画面確認
 		assertEquals("レポート登録 | LMS", webDriver.getTitle());
+
+		//スクショ
+		getEvidence(new Object() {
+		});
 
 	}
 
@@ -150,6 +161,11 @@ public class Case08 {
 
 		//画面確認
 		assertEquals("セクション詳細 | LMS", webDriver.getTitle());
+
+		//スクショ
+		getEvidence(new Object() {
+		});
+
 	}
 
 	@Test
@@ -162,6 +178,11 @@ public class Case08 {
 		visibilityTimeout(By.tagName("h2"), 3);
 
 		assertEquals("ユーザー詳細", webDriver.getTitle());
+
+		//スクショ
+		getEvidence(new Object() {
+		});
+
 	}
 
 	@Test

@@ -44,9 +44,13 @@ public class Case12 {
 	@DisplayName("テスト01 トップページURLでアクセス")
 	void test01() {
 		// TODO ここに追加
-		WebDriverUtils.goTo("http://localhost:8080/lms/");
+		goTo("http://localhost:8080/lms/");
 
-		assertEquals("ログイン | LMS", WebDriverUtils.webDriver.getTitle());
+		assertEquals("ログイン | LMS", webDriver.getTitle());
+
+		//スクショ
+		getEvidence(new Object() {
+		});
 
 	}
 
@@ -61,7 +65,11 @@ public class Case12 {
 
 		utils.visibilityTimeout(By.cssSelector(".navbar-brand"), 10);
 
-		assertEquals("コース詳細 | LMS", WebDriverUtils.webDriver.getTitle());
+		assertEquals("コース詳細 | LMS", webDriver.getTitle());
+
+		//スクショ
+		getEvidence(new Object() {
+		});
 
 	}
 
@@ -75,6 +83,10 @@ public class Case12 {
 
 		assertEquals("勤怠情報変更｜LMS", webDriver.getTitle());
 
+		//スクショ
+		getEvidence(new Object() {
+		});
+
 	}
 
 	@Test
@@ -86,6 +98,10 @@ public class Case12 {
 		webDriver.findElement(By.linkText("勤怠情報を直接編集する")).click();
 		//画面確認
 		assertEquals("勤怠情報変更｜LMS", webDriver.getTitle());
+
+		//スクショ
+		getEvidence(new Object() {
+		});
 
 	}
 
@@ -132,6 +148,10 @@ public class Case12 {
 		//エラー表示確認
 		WebElement errorMsg = webDriver.findElement(By.cssSelector(".help-inline.error"));
 		assertTrue(errorMsg.isDisplayed());
+
+		//スクショ
+		getEvidence(new Object() {
+		});
 
 	}
 

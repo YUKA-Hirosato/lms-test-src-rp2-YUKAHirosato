@@ -23,6 +23,7 @@ import jp.co.sss.lms.ct.util.WebDriverUtils;
 @TestMethodOrder(OrderAnnotation.class)
 @DisplayName("ケース15 受講生 初回ログイン 利用規約に不同意")
 public class Case15 {
+	WebDriverUtils utils = new WebDriverUtils();
 
 	/** 前処理 */
 	@BeforeAll
@@ -41,9 +42,13 @@ public class Case15 {
 	@DisplayName("テスト01 トップページURLでアクセス")
 	void test01() {
 		// TODO ここに追加
-		WebDriverUtils.goTo("http://localhost:8080/lms/");
+		goTo("http://localhost:8080/lms/");
 
-		assertEquals("ログイン | LMS", WebDriverUtils.webDriver.getTitle());
+		assertEquals("ログイン | LMS", webDriver.getTitle());
+
+		//スクショ
+		getEvidence(new Object() {
+		});
 
 	}
 
@@ -57,10 +62,13 @@ public class Case15 {
 		webDriver.findElement(By.cssSelector(".btn.btn-primary")).click();
 
 		//ちょっと待つ
-		WebDriverUtils utils = new WebDriverUtils();
 		utils.visibilityTimeout(By.cssSelector(".nav.navbar-nav.navbar-right"), 3);
 
-		assertEquals("セキュリティ規約 | LMS", WebDriverUtils.webDriver.getTitle());
+		assertEquals("セキュリティ規約 | LMS", webDriver.getTitle());
+
+		//スクショ
+		getEvidence(new Object() {
+		});
 
 	}
 
@@ -77,7 +85,7 @@ public class Case15 {
 		assertEquals("セキュリティ規約への同意は必須です。", classElement.getText());
 
 		//スクショ
-		WebDriverUtils.getEvidence(new Object() {
+		getEvidence(new Object() {
 		});
 
 	}

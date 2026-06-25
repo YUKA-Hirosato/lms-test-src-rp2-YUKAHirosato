@@ -42,9 +42,13 @@ public class Case16 {
 	@DisplayName("テスト01 トップページURLでアクセス")
 	void test01() {
 		// TODO ここに追加
-		WebDriverUtils.goTo("http://localhost:8080/lms/");
+		goTo("http://localhost:8080/lms/");
 
-		assertEquals("ログイン | LMS", WebDriverUtils.webDriver.getTitle());
+		assertEquals("ログイン | LMS", webDriver.getTitle());
+
+		//スクショ
+		getEvidence(new Object() {
+		});
 
 	}
 
@@ -62,7 +66,11 @@ public class Case16 {
 		//utils.visibilityTimeout(By.cssSelector(".nav.navbar-nav.navbar-right"), 1);
 
 		//画面確認
-		assertEquals("セキュリティ規約 | LMS", WebDriverUtils.webDriver.getTitle());
+		assertEquals("セキュリティ規約 | LMS", webDriver.getTitle());
+
+		//スクショ
+		getEvidence(new Object() {
+		});
 
 	}
 
@@ -77,7 +85,11 @@ public class Case16 {
 		webDriver.findElement(By.cssSelector("div .btn.btn-primary")).click();
 
 		//画面確認
-		assertEquals("パスワード変更 | LMS", WebDriverUtils.webDriver.getTitle());
+		assertEquals("パスワード変更 | LMS", webDriver.getTitle());
+
+		//スクショ
+		getEvidence(new Object() {
+		});
 
 	}
 
@@ -108,7 +120,7 @@ public class Case16 {
 		assertTrue(errorMsg.isDisplayed());
 
 		//スクショ
-		WebDriverUtils.getEvidence(new Object() {
+		getEvidence(new Object() {
 		});
 
 	}
@@ -145,7 +157,7 @@ public class Case16 {
 		assertTrue(errorMsg.isDisplayed());
 
 		//スクショ
-		WebDriverUtils.getEvidence(new Object() {
+		getEvidence(new Object() {
 		});
 
 	}
@@ -177,7 +189,7 @@ public class Case16 {
 		assertTrue(errorMsg.isDisplayed());
 
 		//スクショ
-		WebDriverUtils.getEvidence(new Object() {
+		getEvidence(new Object() {
 		});
 
 	}
@@ -210,7 +222,7 @@ public class Case16 {
 		assertTrue(errorMsg.isDisplayed());
 
 		//スクショ
-		WebDriverUtils.getEvidence(new Object() {
+		getEvidence(new Object() {
 		});
 
 	}
