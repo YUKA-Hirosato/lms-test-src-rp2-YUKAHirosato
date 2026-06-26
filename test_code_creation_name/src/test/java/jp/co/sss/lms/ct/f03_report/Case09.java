@@ -81,6 +81,7 @@ public class Case09 {
 	void test03() {
 		// TODO ここに追加
 		webDriver.findElement(By.partialLinkText("ようこそ")).click();
+
 		//画面確認
 		visibilityTimeout(By.tagName("h2"), 3);
 
@@ -106,19 +107,22 @@ public class Case09 {
 		// 修正するボタンを取得してクリック
 		WebElement editButton = webDriver.findElement(By.xpath(xpathSelector));
 
-		// 3. 画面の真ん中までスクロール
 		((JavascriptExecutor) webDriver).executeScript(
 				"arguments[0].scrollIntoView({block:'center'});",
 				editButton);
 
-		// 4. JavaScriptで確実にクリックを実行
 		((JavascriptExecutor) webDriver).executeScript(
 				"arguments[0].click();",
 				editButton);
 
 		visibilityTimeout(By.tagName("h2"), 10);
 
+		//画面確認
 		assertEquals("レポート登録 | LMS", webDriver.getTitle());
+
+		//スクショ
+		getEvidence(new Object() {
+		});
 
 	}
 
@@ -270,7 +274,9 @@ public class Case09 {
 		((JavascriptExecutor) webDriver).executeScript(
 				"arguments[0].scrollIntoView({block:'center'});",
 				contactText);
+
 		contactText.clear();
+
 		//目標の達成度を入力
 		contactText.sendKeys("100");
 
@@ -308,14 +314,17 @@ public class Case09 {
 		((JavascriptExecutor) webDriver).executeScript(
 				"arguments[0].scrollIntoView({block:'center'});",
 				contactText);
+
 		contactText.clear();
 
 		//所感をクリア
 		//所感
 		WebElement content1Text = webDriver.findElement(By.id("content_1"));
+
 		((JavascriptExecutor) webDriver).executeScript(
 				"arguments[0].scrollIntoView({block:'center'});",
 				content1Text);
+
 		content1Text.clear();
 
 		//「提出する」ボタンを押下
@@ -332,6 +341,7 @@ public class Case09 {
 
 		//エラー表示確認
 		WebElement error = webDriver.findElement(By.cssSelector(".form-control.errorInput"));
+
 		assertTrue(error.isDisplayed());
 
 		//スクショ
@@ -351,21 +361,26 @@ public class Case09 {
 		((JavascriptExecutor) webDriver).executeScript(
 				"arguments[0].scrollIntoView({block:'center'});",
 				contactText);
+
 		contactText.sendKeys("3");
 
 		//所感再入力（2000字越え）
 		WebElement content1Text = webDriver.findElement(By.id("content_1"));
+
 		((JavascriptExecutor) webDriver).executeScript(
 				"arguments[0].scrollIntoView({block:'center'});",
 				content1Text);
+
 		content1Text.sendKeys("あ".repeat(2001));
 
 		//一週間の振り返り入力（2000字越え）
 		//一週間の振り返り
 		WebElement content2Text = webDriver.findElement(By.id("content_2"));
+
 		((JavascriptExecutor) webDriver).executeScript(
 				"arguments[0].scrollIntoView({block:'center'});",
 				content2Text);
+
 		content2Text.clear();
 
 		content2Text.sendKeys("あ".repeat(2001));
@@ -384,6 +399,7 @@ public class Case09 {
 
 		//エラー表示確認
 		WebElement error = webDriver.findElement(By.cssSelector(".form-control.errorInput"));
+
 		assertTrue(error.isDisplayed());
 
 		//スクショ

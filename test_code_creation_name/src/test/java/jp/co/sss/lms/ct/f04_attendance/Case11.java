@@ -127,6 +127,8 @@ public class Case11 {
 		webDriver.switchTo().alert().accept();
 
 		//画面確認
+		visibilityTimeout(By.tagName("h2"), 3);
+
 		assertEquals("勤怠情報変更｜LMS", webDriver.getTitle());
 
 		//スクショ

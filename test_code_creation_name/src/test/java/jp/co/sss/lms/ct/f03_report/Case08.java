@@ -160,6 +160,8 @@ public class Case08 {
 		webDriver.findElement(By.cssSelector("button[type='submit']")).click();
 
 		//画面確認
+		visibilityTimeout(By.tagName("h2"), 3);
+
 		assertEquals("セクション詳細 | LMS", webDriver.getTitle());
 
 		//スクショ

@@ -22,6 +22,7 @@ import jp.co.sss.lms.ct.util.WebDriverUtils;
 @TestMethodOrder(OrderAnnotation.class)
 @DisplayName("ケース17 受講生 初回ログイン 正常系")
 public class Case17 {
+	WebDriverUtils utils = new WebDriverUtils();
 
 	/** 前処理 */
 	@BeforeAll
@@ -40,9 +41,9 @@ public class Case17 {
 	@DisplayName("テスト01 トップページURLでアクセス")
 	void test01() {
 		// TODO ここに追加
-		WebDriverUtils.goTo("http://localhost:8080/lms/");
+		goTo("http://localhost:8080/lms/");
 
-		assertEquals("ログイン | LMS", WebDriverUtils.webDriver.getTitle());
+		assertEquals("ログイン | LMS", webDriver.getTitle());
 
 		//スクショ
 		getEvidence(new Object() {
@@ -60,12 +61,10 @@ public class Case17 {
 		webDriver.findElement(By.id("password")).sendKeys("StudentAA01");
 		webDriver.findElement(By.cssSelector(".btn.btn-primary")).click();
 
-		//ちょっと待つ
-		//	WebDriverUtils utils = new WebDriverUtils();
-		//utils.visibilityTimeout(By.cssSelector(".nav.navbar-nav.navbar-right"), 1);
+		visibilityTimeout(By.tagName("h2"), 3);
 
 		//画面確認
-		assertEquals("セキュリティ規約 | LMS", WebDriverUtils.webDriver.getTitle());
+		assertEquals("セキュリティ規約 | LMS", webDriver.getTitle());
 
 		//スクショ
 		getEvidence(new Object() {
@@ -86,8 +85,10 @@ public class Case17 {
 		//次へボタン押下
 		webDriver.findElement(By.cssSelector("div .btn.btn-primary")).click();
 
+		visibilityTimeout(By.tagName("h2"), 3);
+
 		//画面確認
-		assertEquals("パスワード変更 | LMS", WebDriverUtils.webDriver.getTitle());
+		assertEquals("パスワード変更 | LMS", webDriver.getTitle());
 
 		//スクショ
 		getEvidence(new Object() {
@@ -114,13 +115,14 @@ public class Case17 {
 
 		//パスワード変更の確認の変更ボタンを押下
 
-		WebDriverUtils utils = new WebDriverUtils();
 		utils.visibilityTimeout(By.id("upd-btn"), 3);
 
 		webDriver.findElement(By.id("upd-btn")).click();
 
 		//画面確認
-		assertEquals("コース詳細 | LMS", WebDriverUtils.webDriver.getTitle());
+		visibilityTimeout(By.tagName("h2"), 3);
+
+		assertEquals("コース詳細 | LMS", webDriver.getTitle());
 
 		//スクショ
 		getEvidence(new Object() {
